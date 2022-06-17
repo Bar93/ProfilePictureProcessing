@@ -3,12 +3,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 public class MainPanel extends JPanel {
@@ -48,7 +46,7 @@ public class MainPanel extends JPanel {
         grayScaleButton.addActionListener((e) -> {
             this.processingImage.grayScale();
             this.processingImage = new ProfilePicture(Constant.PATH_PROCESSING_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
-            processedIcon.setImage(this.processingImage.getImage());;
+            processedIcon.setImage(this.processingImage.getImage());
             this.processedPic.setIcon(processedIcon);
             this.add(this.processedPic);
             this.repaint();
@@ -58,7 +56,7 @@ public class MainPanel extends JPanel {
         colorRightButton.addActionListener((e) -> {
             this.processingImage.colorShiftRight();
             this.processingImage = new ProfilePicture(Constant.PATH_PROCESSING_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
-            processedIcon.setImage(this.processingImage.getImage());;
+            processedIcon.setImage(this.processingImage.getImage());
             this.processedPic.setIcon(processedIcon);
             this.add(this.processedPic);
             this.repaint();
@@ -68,7 +66,7 @@ public class MainPanel extends JPanel {
         colorLeftButton.addActionListener((e) -> {
             this.processingImage.colorShiftLeft();
             this.processingImage = new ProfilePicture(Constant.PATH_PROCESSING_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
-            processedIcon.setImage(this.processingImage.getImage());;
+            processedIcon.setImage(this.processingImage.getImage());
             this.processedPic.setIcon(processedIcon);
             this.add(this.processedPic);
             this.repaint();
@@ -79,7 +77,7 @@ public class MainPanel extends JPanel {
         mirrorButton.addActionListener((e) -> {
             this.processingImage.mirror();
             this.processingImage = new ProfilePicture(Constant.PATH_PROCESSING_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
-            processedIcon.setImage(this.processingImage.getImage());;
+            processedIcon.setImage(this.processingImage.getImage());
             this.processedPic.setIcon(processedIcon);
             this.add(this.processedPic);
             this.repaint();
@@ -89,7 +87,7 @@ public class MainPanel extends JPanel {
         borderButton.addActionListener((e) -> {
             this.processingImage.border();
             this.processingImage = new ProfilePicture(Constant.PATH_PROCESSING_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
-            processedIcon.setImage(this.processingImage.getImage());;
+            processedIcon.setImage(this.processingImage.getImage());
             this.processedPic.setIcon(processedIcon);
             this.add(this.processedPic);
             this.repaint();
@@ -99,7 +97,7 @@ public class MainPanel extends JPanel {
         negativeButton.addActionListener((e) -> {
             this.processingImage.negative();
             this.processingImage = new ProfilePicture(Constant.PATH_PROCESSING_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
-            processedIcon.setImage(this.processingImage.getImage());;
+            processedIcon.setImage(this.processingImage.getImage());
             this.processedPic.setIcon(processedIcon);
             this.add(this.processedPic);
             this.repaint();
@@ -108,7 +106,7 @@ public class MainPanel extends JPanel {
         originalButton.setBounds(Constant.BUTTON_X*2+Constant.BUTTON_SPACE_X,Constant.BUTTON_Y-Constant.BUTTON_SPACE_Y,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
         originalButton.addActionListener((e) -> {
             this.processingImage = new ProfilePicture(Constant.PATH_ORIGINAL_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
-            processedIcon.setImage(this.processingImage.getImage());;
+            processedIcon.setImage(this.processingImage.getImage());
             this.processedPic.setIcon(processedIcon);
             this.add(this.processedPic);
             this.repaint();
@@ -123,15 +121,15 @@ public class MainPanel extends JPanel {
         brightness.addChangeListener(e -> {
                 this.processingImage.setBrightness(brightness.getValue());
                 this.processingImage = new ProfilePicture(Constant.PATH_PROCESSING_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
-                processedIcon.setImage(this.processingImage.getImage());;
+                processedIcon.setImage(this.processingImage.getImage());
                 this.processedPic.setIcon(processedIcon);
                 this.add(this.processedPic);
                 this.repaint();
         });
-        this.firstName = new JTextField("Firstname");
+        this.firstName = new JTextField("First name");
         this.firstName.setBounds(Constant.BUTTON_X,Constant.BUTTON_Y-Constant.BUTTON_SPACE_Y*2,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
         this.add(this.firstName);
-        this.lastName = new JTextField("Lastname");
+        this.lastName = new JTextField("Last name");
         this.lastName.setBounds(Constant.BUTTON_X*2+Constant.BUTTON_SPACE_X,Constant.BUTTON_Y-Constant.BUTTON_SPACE_Y*2,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
         this.add(this.lastName);
         JButton profileButton = new JButton("Get Profile");
@@ -197,11 +195,11 @@ public class MainPanel extends JPanel {
 
     public boolean checkUserInput(){
         boolean ans = true;
-        if (this.firstName.getText().equals("Firstname") ||this.firstName.getText().equals("")||this.firstName.getText().equals("enter correct first name") ){
+        if (this.firstName.getText().equals("First name") ||this.firstName.getText().equals("")||this.firstName.getText().equals("enter correct first name") ){
             this.firstName.setText("enter correct first name");
             ans = false;
         }
-        if (this.lastName.getText().equals("Lastname") ||this.lastName.getText().equals("")||this.lastName.getText().equals("enter correct last name") ){
+        if (this.lastName.getText().equals("Last name") ||this.lastName.getText().equals("")||this.lastName.getText().equals("enter correct last name") ){
             this.lastName.setText("enter correct last name");
             ans = false;
         }

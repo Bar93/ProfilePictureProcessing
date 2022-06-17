@@ -87,9 +87,9 @@ public class ProfilePicture {
             for (int i = 0; i < bufferedImage.getHeight(); i++) {
                 for (int j = 0; j < bufferedImage.getWidth(); j++) {
                     Color c = new Color(bufferedImage.getRGB(j, i));
-                    int red = (int) (c.getRed());
-                    int green = (int) (c.getGreen());
-                    int blue = (int) (c.getBlue());
+                    int red =  c.getRed();
+                    int green = c.getGreen();
+                    int blue = c.getBlue();
                     Color newColor = new Color(green, blue, red);
                     bufferedImage.setRGB(j, i, newColor.getRGB());
                 }
