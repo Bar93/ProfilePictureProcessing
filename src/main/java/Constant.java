@@ -14,7 +14,7 @@ public class Constant {
     public static final int BUTTON_WIDTH = 150;
     public static final String PATH_ORIGINAL_IMAGE = "C:\\Users\\USER\\Documents\\profile picture processing\\original.jpg";
     public static final String PATH_PROCESSING_IMAGE = "C:\\Users\\USER\\Documents\\profile picture processing\\processed.jpg";
-    public static final String PATH_EMPTY_IMAGE = "C:\\Users\\USER\\Documents\\profile picture processing\\emptyImage.jpg";
+    public static final String PATH_EMPTY_IMAGE = "emptyImage.jpg";
     public static final int PICTURE_X = 10 ;
     public static final int PICTURE_Y = 10 ;
     public static final int PICTURE_WIDTH = 220 ;

@@ -24,7 +24,7 @@ public class MainPanel extends JPanel {
     public MainPanel() {
         this.setLayout(null);
         this.setBounds(Constant.PANEL_BUTTON_X, Constant.PANEL_BUTTON_Y, Constant.PANEL_BUTTON_WIDTH, Constant.PANEL_BUTTON_HEIGHT);
-        this.setBackground(Color.GRAY);
+        this.setBackground(Color.DARK_GRAY);
         this.originalImage = new ProfilePicture(Constant.PATH_EMPTY_IMAGE,Constant.PICTURE_X,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
         this.processingImage = new ProfilePicture(Constant.PATH_EMPTY_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
         this.originalPic = new JLabel();
@@ -76,7 +76,6 @@ public class MainPanel extends JPanel {
         });
         JButton mirrorButton = new JButton("Mirror");
         mirrorButton.setBounds(Constant.BUTTON_X*2+Constant.BUTTON_SPACE_X,Constant.BUTTON_Y+Constant.BUTTON_SPACE_Y,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
-
         mirrorButton.addActionListener((e) -> {
             this.processingImage.mirror();
             this.processingImage = new ProfilePicture(Constant.PATH_PROCESSING_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
@@ -87,7 +86,6 @@ public class MainPanel extends JPanel {
         });
         JButton borderButton = new JButton("Border");
         borderButton.setBounds(Constant.BUTTON_X,Constant.BUTTON_Y+Constant.BUTTON_SPACE_Y*2,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
-
         borderButton.addActionListener((e) -> {
             this.processingImage.border();
             this.processingImage = new ProfilePicture(Constant.PATH_PROCESSING_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
@@ -105,11 +103,9 @@ public class MainPanel extends JPanel {
             this.processedPic.setIcon(processedIcon);
             this.add(this.processedPic);
             this.repaint();
-
         });
         JButton originalButton = new JButton("Original");
-        originalButton.setBounds(Constant.BUTTON_X,Constant.BUTTON_Y+Constant.BUTTON_SPACE_Y*3,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
-
+        originalButton.setBounds(Constant.BUTTON_X*2+Constant.BUTTON_SPACE_X,Constant.BUTTON_Y-Constant.BUTTON_SPACE_Y,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
         originalButton.addActionListener((e) -> {
             this.processingImage = new ProfilePicture(Constant.PATH_ORIGINAL_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
             processedIcon.setImage(this.processingImage.getImage());;
@@ -118,6 +114,26 @@ public class MainPanel extends JPanel {
             this.repaint();
 
         });
+        JSlider brightness = new JSlider(JSlider.HORIZONTAL, 0, 10, 5);
+        brightness.setBounds(Constant.BUTTON_X,Constant.BUTTON_Y+Constant.BUTTON_SPACE_Y*3,Constant.BUTTON_WIDTH*2,Constant.BUTTON_HEIGHT);
+        brightness.setMinorTickSpacing(1);
+        brightness.setMajorTickSpacing(10);
+        brightness.setPaintTicks(true);
+        brightness.setPaintLabels(true);
+        brightness.addChangeListener(e -> {
+                this.processingImage.setBrightness(brightness.getValue());
+                this.processingImage = new ProfilePicture(Constant.PATH_PROCESSING_IMAGE,Constant.PICTURE_X*25,Constant.PICTURE_Y,Constant.PICTURE_WIDTH,Constant.PICTURE_HEIGHT);
+                processedIcon.setImage(this.processingImage.getImage());;
+                this.processedPic.setIcon(processedIcon);
+                this.add(this.processedPic);
+                this.repaint();
+        });
+        this.firstName = new JTextField("Firstname");
+        this.firstName.setBounds(Constant.BUTTON_X,Constant.BUTTON_Y-Constant.BUTTON_SPACE_Y*2,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
+        this.add(this.firstName);
+        this.lastName = new JTextField("Lastname");
+        this.lastName.setBounds(Constant.BUTTON_X*2+Constant.BUTTON_SPACE_X,Constant.BUTTON_Y-Constant.BUTTON_SPACE_Y*2,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
+        this.add(this.lastName);
         JButton profileButton = new JButton("Get Profile");
         profileButton.setBounds(Constant.BUTTON_X,Constant.BUTTON_Y-Constant.BUTTON_SPACE_Y,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
         this.add(profileButton);
@@ -130,16 +146,11 @@ public class MainPanel extends JPanel {
                 this.add(colorRightButton);
                 this.add(grayScaleButton);
                 this.add(colorLeftButton);
+                this.add(brightness);
                 this.repaint();
             }
-
         });
-        this.firstName = new JTextField("Firstname");
-        this.firstName.setBounds(Constant.BUTTON_X/2,Constant.BUTTON_Y-Constant.BUTTON_SPACE_Y*2,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
-        this.add(this.firstName);
-        this.lastName = new JTextField("Lastname");
-        this.lastName.setBounds(Constant.BUTTON_X*2,Constant.BUTTON_Y-Constant.BUTTON_SPACE_Y*2,Constant.BUTTON_WIDTH,Constant.BUTTON_HEIGHT);
-        this.add(this.lastName);
+
     }
 
     public boolean getProfilePicture (){
@@ -193,6 +204,22 @@ public class MainPanel extends JPanel {
         if (this.lastName.getText().equals("Lastname") ||this.lastName.getText().equals("")||this.lastName.getText().equals("enter correct last name") ){
             this.lastName.setText("enter correct last name");
             ans = false;
+        }
+        if (ans){
+            for (int i=0;i<this.lastName.getText().length();i++){
+                if (!Character.isUpperCase(this.lastName.getText().charAt(i)) &&!Character.isLowerCase(this.lastName.getText().charAt(i))){
+                    this.lastName.setText("english only,without space");
+                    ans = false;
+                    break;
+                }
+            }
+            for (int j=0;j<this.firstName.getText().length();j++){
+                if (!Character.isUpperCase(this.firstName.getText().charAt(j)) &&!Character.isLowerCase(this.firstName.getText().charAt(j))){
+                    this.firstName.setText("english only,without space");
+                    ans = false;
+                    break;
+                }
+            }
         }
 
         return ans;
