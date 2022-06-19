@@ -14,6 +14,8 @@ public class ProfilePicture {
     private int width;
     private int height;
 
+    public static final int DIFFERENCE_BETWEEN_COLOR = 20;
+
     public ProfilePicture(String url, int x, int y, int width, int height) {
         this.fileUrl = new File(url);
         try {
@@ -175,7 +177,7 @@ public class ProfilePicture {
 
     public boolean isDifference(Color c1, Color c2) {
         int difference = 0;
-        int minDifference = 20;
+        int minDifference = DIFFERENCE_BETWEEN_COLOR;
         difference += Math.abs(c1.getRed() - c2.getRed());
         difference += Math.abs(c1.getBlue() - c2.getBlue());
         difference += Math.abs(c1.getGreen() - c2.getGreen());
