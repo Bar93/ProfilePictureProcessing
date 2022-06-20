@@ -179,8 +179,12 @@ public class MainPanel extends JPanel {
                                this.repaint();
                            }
                            else {
-                              email.setText("invalid email");
-                              password.setText("invalid password");
+                               this.firstName.setText("invalid email/password");
+                              this.lastName.setText("start from beginning");
+                               email.setVisible(false);
+                               password.setVisible(false);
+                               login.setVisible(false);
+
                            }
 
                         });
@@ -349,8 +353,8 @@ public class MainPanel extends JPanel {
             emailLabel.sendKeys(email);
             passwordLabel.sendKeys(password);
             enterButton.click();
-            WebElement invalidnput = driver.findElement(By.xpath("//div[@class=\"_9ay5\"]"));
-            if (invalidnput.isDisplayed()){
+            WebElement invalidEmail = driver.findElement(By.xpath("//div[@class=\"_9ay5\"]"));
+            if (invalidEmail.isDisplayed()){
                 ans = false;
                 driver.close();
             }
@@ -358,7 +362,16 @@ public class MainPanel extends JPanel {
         catch (Exception e){
             e.printStackTrace();
         }
-
+        try {
+            WebElement invalidPassword = driver.findElement(By.xpath("//div[@class=\"_9ay7\"]"));
+            if (invalidPassword.isDisplayed()) {
+                ans = false;
+                driver.close();
+            }
+        }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         return ans;
     }
 
