@@ -178,22 +178,15 @@ public class MainPanel extends JPanel {
                                this.add(brightness);
                                this.repaint();
                            }
+                           else {
+                              email.setText("invalid email");
+                              password.setText("invalid password");
+                           }
 
                         });
                     }
                 }
             }
-//            if (getProfilePicture()) {
-//                this.add(borderButton);
-//                this.add(negativeButton);
-//                this.add(originalButton);
-//                this.add(mirrorButton);
-//                this.add(colorRightButton);
-//                this.add(grayScaleButton);
-//                this.add(colorLeftButton);
-//                this.add(brightness);
-//                this.repaint();
-//            }
         });
     }
 
@@ -349,12 +342,23 @@ public class MainPanel extends JPanel {
 
     public boolean login (ChromeDriver driver,String email,String password){
         boolean ans = true;
-        WebElement emailLabel = driver.findElement(By.xpath("//input[@type=\"email\"]"));
-        WebElement passwordLabel = driver.findElement(By.xpath("//input[@type=\"password\"]"));
-        WebElement enterButton = driver.findElement(By.xpath("//input[@type=\"submit\"]"));
-        emailLabel.sendKeys(email);
-        passwordLabel.sendKeys(password);
-        enterButton.click();
+        try {
+            WebElement emailLabel = driver.findElement(By.xpath("//input[@type=\"email\"]"));
+            WebElement passwordLabel = driver.findElement(By.xpath("//input[@type=\"password\"]"));
+            WebElement enterButton = driver.findElement(By.xpath("//input[@type=\"submit\"]"));
+            emailLabel.sendKeys(email);
+            passwordLabel.sendKeys(password);
+            enterButton.click();
+            WebElement invalidnput = driver.findElement(By.xpath("//div[@class=\"_9ay5\"]"));
+            if (invalidnput.isDisplayed()){
+                ans = false;
+                driver.close();
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         return ans;
     }
 
